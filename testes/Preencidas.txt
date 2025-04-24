@@ -1,0 +1,9 @@
+Preencidas:
+
+Status: 5
+Região: 4
+Endereço: 270
+telefone: 70
+cliente 70
+imóveis: 200
+propostas: 356

@@ -1,0 +1,333 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 23/10/2024 às 19:40
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `bd_imoveis`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cliente_03`
+--
+
+CREATE TABLE `cliente_03` (
+  `A03_id` int(11) NOT NULL,
+  `Endereco_06_A06_id` int(11) NOT NULL,
+  `Telefone_02_A02_id` int(11) NOT NULL,
+  `Status_01_A01_id` int(11) NOT NULL,
+  `A03_nome` varchar(45) NOT NULL,
+  `A03_nacimento` date NOT NULL,
+  `A03_email` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `contrato_08`
+--
+
+CREATE TABLE `contrato_08` (
+  `A08_id` int(11) NOT NULL,
+  `Propota_07_A07_id` int(11) NOT NULL,
+  `Cliente_03_A03_id` int(11) NOT NULL,
+  `Imovel_05_A05_id` int(11) NOT NULL,
+  `Status_01_A01_id` int(11) NOT NULL,
+  `A08_tipo` varchar(45) NOT NULL,
+  `A08_periodo` varchar(20) DEFAULT NULL,
+  `A08_formaPagamento` varchar(40) NOT NULL,
+  `A08_data` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `endereco_06`
+--
+
+CREATE TABLE `endereco_06` (
+  `A06_id` int(11) NOT NULL,
+  `Regiao_04_A04_id` int(11) NOT NULL,
+  `A06_logradouro` varchar(45) NOT NULL,
+  `A06_cep` varchar(8) NOT NULL,
+  `A06_numero` varchar(10) NOT NULL,
+  `A06_complemento` varchar(45) NOT NULL,
+  `A06_bairro` varchar(45) NOT NULL,
+  `A06_cidade` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `imovel_05`
+--
+
+CREATE TABLE `imovel_05` (
+  `A05_id` int(11) NOT NULL,
+  `Cliente_03_A03_id` int(11) NOT NULL,
+  `Endereco_06_A06_id` int(11) NOT NULL,
+  `Status_01_A01_id` int(11) NOT NULL,
+  `A05_escritura` varchar(6) DEFAULT NULL,
+  `A05_metros` decimal(10,2) DEFAULT NULL,
+  `A05_quarto` char(2) DEFAULT NULL,
+  `A05_cozinha` char(2) DEFAULT NULL,
+  `A05_garagem` char(2) DEFAULT NULL,
+  `A05_sala` char(2) DEFAULT NULL,
+  `A05_banheiro` char(2) DEFAULT NULL,
+  `A05_areaLazer` char(2) DEFAULT NULL,
+  `A05_lavanderia` char(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `proposta_07`
+--
+
+CREATE TABLE `proposta_07` (
+  `A07_id` int(11) NOT NULL,
+  `Cliente_03_A03_id` int(11) NOT NULL,
+  `Imovel_05_A05_id` int(11) NOT NULL,
+  `Status_01_A01_id` int(11) NOT NULL,
+  `A07_valor` decimal(10,2) NOT NULL,
+  `A07_descricao` varchar(255) DEFAULT NULL,
+  `A07_data` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `regiao_04`
+--
+
+CREATE TABLE `regiao_04` (
+  `A04_id` int(11) NOT NULL,
+  `A04_nome` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `regiao_04`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `status_01`
+--
+
+CREATE TABLE `status_01` (
+  `A01_id` int(11) NOT NULL,
+  `A01_situacao` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `status_01`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `telefone_02`
+--
+
+CREATE TABLE `telefone_02` (
+  `A02_id` int(11) NOT NULL,
+  `A02_numero` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `cliente_03`
+--
+ALTER TABLE `cliente_03`
+  ADD PRIMARY KEY (`A03_id`),
+  ADD KEY `Cliente_03_FKIndex1` (`Status_01_A01_id`),
+  ADD KEY `Cliente_03_FKIndex2` (`Telefone_02_A02_id`),
+  ADD KEY `Cliente_03_FKIndex3` (`Endereco_06_A06_id`),
+  ADD KEY `IFK_Rel_02` (`Status_01_A01_id`),
+  ADD KEY `IFK_Rel_06` (`Telefone_02_A02_id`),
+  ADD KEY `IFK_Rel_08` (`Endereco_06_A06_id`);
+
+--
+-- Índices de tabela `contrato_08`
+--
+ALTER TABLE `contrato_08`
+  ADD PRIMARY KEY (`A08_id`),
+  ADD KEY `Contrato_08_FKIndex1` (`Status_01_A01_id`),
+  ADD KEY `Contrato_08_FKIndex2` (`Imovel_05_A05_id`),
+  ADD KEY `Contrato_08_FKIndex3` (`Cliente_03_A03_id`),
+  ADD KEY `Contrato_08_FKIndex4` (`Propota_07_A07_id`),
+  ADD KEY `IFK_Rel_04` (`Status_01_A01_id`),
+  ADD KEY `IFK_Rel_11` (`Imovel_05_A05_id`),
+  ADD KEY `IFK_Rel_13` (`Cliente_03_A03_id`),
+  ADD KEY `IFK_Rel_14` (`Propota_07_A07_id`);
+
+--
+-- Índices de tabela `endereco_06`
+--
+ALTER TABLE `endereco_06`
+  ADD PRIMARY KEY (`A06_id`),
+  ADD KEY `Endereco_06_FKIndex1` (`Regiao_04_A04_id`),
+  ADD KEY `IFK_Rel_07` (`Regiao_04_A04_id`);
+
+--
+-- Índices de tabela `imovel_05`
+--
+ALTER TABLE `imovel_05`
+  ADD PRIMARY KEY (`A05_id`),
+  ADD KEY `Imovel_05_FKIndex1` (`Status_01_A01_id`),
+  ADD KEY `Imovel_05_FKIndex2` (`Endereco_06_A06_id`),
+  ADD KEY `Imovel_05_FKIndex3` (`Cliente_03_A03_id`),
+  ADD KEY `IFK_Rel_01` (`Status_01_A01_id`),
+  ADD KEY `IFK_Rel_07` (`Endereco_06_A06_id`),
+  ADD KEY `IFK_Rel_09` (`Cliente_03_A03_id`);
+
+--
+-- Índices de tabela `proposta_07`
+--
+ALTER TABLE `proposta_07`
+  ADD PRIMARY KEY (`A07_id`),
+  ADD KEY `Propota_07_FKIndex1` (`Status_01_A01_id`),
+  ADD KEY `Propota_07_FKIndex2` (`Imovel_05_A05_id`),
+  ADD KEY `Propota_07_FKIndex3` (`Cliente_03_A03_id`),
+  ADD KEY `IFK_Rel_03` (`Status_01_A01_id`),
+  ADD KEY `IFK_Rel_10` (`Imovel_05_A05_id`),
+  ADD KEY `IFK_Rel_12` (`Cliente_03_A03_id`);
+
+--
+-- Índices de tabela `regiao_04`
+--
+ALTER TABLE `regiao_04`
+  ADD PRIMARY KEY (`A04_id`);
+
+--
+-- Índices de tabela `status_01`
+--
+ALTER TABLE `status_01`
+  ADD PRIMARY KEY (`A01_id`);
+
+--
+-- Índices de tabela `telefone_02`
+--
+ALTER TABLE `telefone_02`
+  ADD PRIMARY KEY (`A02_id`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `cliente_03`
+--
+ALTER TABLE `cliente_03`
+  MODIFY `A03_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `contrato_08`
+--
+ALTER TABLE `contrato_08`
+  MODIFY `A08_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `endereco_06`
+--
+ALTER TABLE `endereco_06`
+  MODIFY `A06_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `imovel_05`
+--
+ALTER TABLE `imovel_05`
+  MODIFY `A05_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `proposta_07`
+--
+ALTER TABLE `proposta_07`
+  MODIFY `A07_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `regiao_04`
+--
+ALTER TABLE `regiao_04`
+  MODIFY `A04_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `status_01`
+--
+ALTER TABLE `status_01`
+  MODIFY `A01_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `telefone_02`
+--
+ALTER TABLE `telefone_02`
+  MODIFY `A02_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `cliente_03`
+--
+ALTER TABLE `cliente_03`
+  ADD CONSTRAINT `cliente_03_ibfk_1` FOREIGN KEY (`Status_01_A01_id`) REFERENCES `status_01` (`A01_id`),
+  ADD CONSTRAINT `cliente_03_ibfk_2` FOREIGN KEY (`Telefone_02_A02_id`) REFERENCES `telefone_02` (`A02_id`),
+  ADD CONSTRAINT `cliente_03_ibfk_3` FOREIGN KEY (`Endereco_06_A06_id`) REFERENCES `endereco_06` (`A06_id`);
+
+--
+-- Restrições para tabelas `contrato_08`
+--
+ALTER TABLE `contrato_08`
+  ADD CONSTRAINT `contrato_08_ibfk_1` FOREIGN KEY (`Status_01_A01_id`) REFERENCES `status_01` (`A01_id`),
+  ADD CONSTRAINT `contrato_08_ibfk_2` FOREIGN KEY (`Imovel_05_A05_id`) REFERENCES `imovel_05` (`A05_id`),
+  ADD CONSTRAINT `contrato_08_ibfk_3` FOREIGN KEY (`Cliente_03_A03_id`) REFERENCES `cliente_03` (`A03_id`),
+  ADD CONSTRAINT `contrato_08_ibfk_4` FOREIGN KEY (`Propota_07_A07_id`) REFERENCES `proposta_07` (`A07_id`);
+
+--
+-- Restrições para tabelas `endereco_06`
+--
+ALTER TABLE `endereco_06`
+  ADD CONSTRAINT `endereco_06_ibfk_1` FOREIGN KEY (`Regiao_04_A04_id`) REFERENCES `regiao_04` (`A04_id`);
+
+--
+-- Restrições para tabelas `imovel_05`
+--
+ALTER TABLE `imovel_05`
+  ADD CONSTRAINT `imovel_05_ibfk_1` FOREIGN KEY (`Status_01_A01_id`) REFERENCES `status_01` (`A01_id`),
+  ADD CONSTRAINT `imovel_05_ibfk_2` FOREIGN KEY (`Endereco_06_A06_id`) REFERENCES `endereco_06` (`A06_id`),
+  ADD CONSTRAINT `imovel_05_ibfk_3` FOREIGN KEY (`Cliente_03_A03_id`) REFERENCES `cliente_03` (`A03_id`);
+
+--
+-- Restrições para tabelas `proposta_07`
+--
+ALTER TABLE `proposta_07`
+  ADD CONSTRAINT `proposta_07_ibfk_1` FOREIGN KEY (`Status_01_A01_id`) REFERENCES `status_01` (`A01_id`),
+  ADD CONSTRAINT `proposta_07_ibfk_2` FOREIGN KEY (`Imovel_05_A05_id`) REFERENCES `imovel_05` (`A05_id`),
+  ADD CONSTRAINT `proposta_07_ibfk_3` FOREIGN KEY (`Cliente_03_A03_id`) REFERENCES `cliente_03` (`A03_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
